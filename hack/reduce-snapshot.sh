@@ -63,7 +63,7 @@ if [ "${SINGLE_COMPONENT}" == "true" ]; then
     jq --arg component "${SNAPSHOT_CREATION_COMPONENT}" \
     'del(.components[] | select(.name != $component))' "$WORKING_SNAPSHOT" > "$REDUCED_SNAPSHOT"
 
-    mv "$REDUCED_SNAPSHOT" "$WORKING_SNAPSHOT"
+    cp "$REDUCED_SNAPSHOT" "$WORKING_SNAPSHOT"
     ## make sure we still have 1 component
     COMPONENT_COUNT=$(jq -r '[ .components[] ] | length' "$WORKING_SNAPSHOT")
     echo "COMPONENT_COUNT: ${COMPONENT_COUNT}"
